@@ -11,6 +11,9 @@ numpy>=1.25.0
 # Technical analysis
 pandas-ta>=0.3.14b0
 
+# Backtesting
+vectorbt>=0.26.0
+
 # CLI & Logging
 typer[all]>=0.9.0
 loguru>=0.7.0

@@ -222,37 +222,64 @@ async def _run_single_backtest(
     commission: float
 ) -> Dict[str, Any]:
     """Run a single backtest and return results."""
-    # Mock implementation - replace with actual backtesting
-    # This would integrate with the existing backtesting engine
+    from crypto_trader.strategies import get_registry
+    from crypto_trader.data.fetchers import BinanceDataFetcher
+    from crypto_trader.backtesting.engine import BacktestEngine
+    from crypto_trader.core.config import BacktestConfig
+    from datetime import timedelta
 
-    import random
-    import time
+    try:
+        # Get strategy from registry
+        registry = get_registry()
+        if strategy_name not in registry:
+            raise ValueError(f"Strategy '{strategy_name}' not found")
 
-    # Simulate backtest execution time
-    await asyncio.sleep(random.uniform(0.1, 0.3))
+        strategy_class = registry[strategy_name]
+        strategy = strategy_class()
 
-    # Generate mock results (replace with real backtest)
-    total_return = random.uniform(-0.3, 0.5)
-    sharpe = random.uniform(-1.0, 3.0)
-    max_dd = random.uniform(-0.5, -0.05)
-    win_rate = random.uniform(0.3, 0.7)
-    total_trades = random.randint(10, 200)
+        # Fetch data
+        fetcher = BinanceDataFetcher()
+        end_date = datetime.now()
+        start_date = end_date - timedelta(days=period_days)
 
-    return {
-        "strategy": strategy_name,
-        "symbol": symbol,
-        "timeframe": timeframe,
-        "period_days": period_days,
-        "metrics": {
-            "total_return": total_return,
-            "sharpe_ratio": sharpe,
-            "max_drawdown": max_dd,
-            "win_rate": win_rate,
-            "total_trades": total_trades,
-            "profit_factor": abs(total_return) / max(abs(max_dd), 0.01),
-        },
-        "timestamp": datetime.now().isoformat()
-    }
+        data = fetcher.fetch_ohlcv(
+            symbol=symbol,
+            timeframe=timeframe,
+            since=start_date,
+            limit=None
+        )
+
+        # Create backtest config
+        config = BacktestConfig(
+            initial_capital=initial_capital,
+            commission=commission,
+            slippage=0.0005
+        )
+
+        # Run backtest
+        engine = BacktestEngine()
+        result = engine.run_backtest(strategy, data, config)
+
+        # Return formatted results
+        return {
+            "strategy": strategy_name,
+            "symbol": symbol,
+            "timeframe": timeframe,
+            "period_days": period_days,
+            "metrics": {
+                "total_return": result.metrics.total_return,
+                "sharpe_ratio": result.metrics.sharpe_ratio,
+                "max_drawdown": result.metrics.max_drawdown,
+                "win_rate": result.metrics.win_rate,
+                "total_trades": len(result.trades),
+                "profit_factor": result.metrics.profit_factor if hasattr(result.metrics, 'profit_factor') else 0.0,
+            },
+            "timestamp": datetime.now().isoformat()
+        }
+
+    except Exception as e:
+        logger.error(f"Backtest failed for {strategy_name} {symbol} {timeframe} {period_days}d: {e}")
+        raise
 
 
 def _calculate_summary(results: List[Dict[str, Any]]) -> Dict[str, Any]:
