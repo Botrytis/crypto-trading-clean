@@ -1,4 +1,5 @@
 """
+from crypto_trader.web.config import API_URL
 Strategy Browser Page
 
 Browse, search, and filter all available trading strategies.
@@ -12,7 +13,7 @@ from typing import List, Dict, Any
 st.set_page_config(page_title="Strategies", page_icon="📚", layout="wide")
 
 # API URL
-API_URL = "http://localhost:8001"
+# API_URL now imported from config
 
 # Page header
 st.title("📚 Strategy Browser")

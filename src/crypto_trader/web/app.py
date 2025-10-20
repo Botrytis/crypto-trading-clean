@@ -1,4 +1,5 @@
 """
+from crypto_trader.web.config import API_URL
 Crypto Trading Platform - Streamlit Web UI
 
 Main application entry point for the multi-page Streamlit dashboard.
@@ -73,7 +74,7 @@ with st.sidebar:
     # Check API connectivity
     import requests
     try:
-        response = requests.get("http://localhost:8001/health", timeout=2)
+        response = requests.get(f"{API_URL}/health", timeout=2)
         if response.status_code == 200:
             st.success("✅ API Connected")
         else:

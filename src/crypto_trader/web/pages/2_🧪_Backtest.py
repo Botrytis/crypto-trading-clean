@@ -1,4 +1,5 @@
 """
+from crypto_trader.web.config import API_URL
 Backtest Runner Page
 
 Configure and execute strategy backtests with real-time progress tracking.
@@ -13,7 +14,7 @@ from typing import Dict, Any
 st.set_page_config(page_title="Backtest", page_icon="🧪", layout="wide")
 
 # API URL
-API_URL = "http://localhost:8001"
+# API_URL now imported from config
 
 # Page header
 st.title("🧪 Backtest Runner")

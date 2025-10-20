@@ -1,4 +1,5 @@
 """
+from crypto_trader.web.config import API_URL
 Results Viewer Page
 
 Display detailed backtest results with charts, metrics, and trade analysis.
@@ -14,7 +15,7 @@ from datetime import datetime
 st.set_page_config(page_title="Results", page_icon="📊", layout="wide")
 
 # API URL
-API_URL = "http://localhost:8001"
+# API_URL now imported from config
 
 # Page header
 st.title("📊 Backtest Results")

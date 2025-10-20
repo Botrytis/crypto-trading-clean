@@ -1,4 +1,5 @@
 """
+from crypto_trader.web.config import API_URL
 Strategy Comparison Page
 
 Compare multiple strategies side-by-side with performance heatmaps.
@@ -13,7 +14,7 @@ import plotly.express as px
 st.set_page_config(page_title="Comparison", page_icon="🔍", layout="wide")
 
 # API URL
-API_URL = "http://localhost:8001"
+# API_URL now imported from config
 
 # Page header
 st.title("🔍 Strategy Comparison")
