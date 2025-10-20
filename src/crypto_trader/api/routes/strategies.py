@@ -49,7 +49,11 @@ async def list_strategies(
         registry = get_registry()
         all_strategies = []
 
-        for strategy_name, strategy_class in registry.items():
+        # Use list_strategies() method instead of .items()
+        registered_strategies = registry.list_strategies()
+
+        for strategy_name, strategy_meta in registered_strategies.items():
+            strategy_class = strategy_meta["class"]
             # Create temporary instance to get info
             try:
                 strategy = strategy_class()
