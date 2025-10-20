@@ -211,10 +211,11 @@ async def _run_backtest_task(job_id: str, request: BacktestRequest):
         end_date = datetime.now()
         start_date = end_date - timedelta(days=request.days)
 
-        data = fetcher.fetch_ohlcv(
+        data = fetcher.get_ohlcv(
             symbol=request.symbol,
             timeframe=request.timeframe,
-            since=start_date,
+            start_date=start_date,
+            end_date=end_date,
             limit=None
         )
 
