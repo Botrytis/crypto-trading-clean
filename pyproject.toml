@@ -1,0 +1,114 @@
+[project]
+name = "crypto-trader"
+version = "0.1.0"
+description = "Modular crypto algorithmic trading and analysis system"
+authors = [{name = "Crypto Trader", email = "trader@crypto.com"}]
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    # Exchange connectivity
+    "ccxt>=4.0.0",
+
+    # Data manipulation
+    "pandas>=2.1.0",
+    "numpy>=1.25.0",
+
+    # Technical analysis
+    "pandas-ta>=0.3.14b0",
+
+    # Backtesting
+    "vectorbt>=0.26.0",
+
+    # Database
+    "sqlalchemy>=2.0.0",
+    "psycopg2-binary>=2.9.9",
+
+    # Caching
+    "redis>=5.0.0",
+
+    # Web framework
+    "fastapi>=0.104.0",
+    "uvicorn>=0.24.0",
+    "streamlit>=1.28.0",
+
+    # CLI
+    "typer[all]>=0.9.0",
+    "rich>=13.7.0",
+
+    # Configuration
+    "pydantic>=2.0.0",
+    "pydantic-settings>=2.0.0",
+    "pyyaml>=6.0.0",
+    "python-dotenv>=1.0.0",
+
+    # Logging
+    "loguru>=0.7.0",
+
+    # Visualization
+    "plotly>=5.17.0",
+    "matplotlib>=3.8.0",
+
+    # Utilities
+    "python-dateutil>=2.8.2",
+    "aiohttp>=3.9.0",
+    "tqdm>=4.66.0",
+    "numba>=0.58.0",  # JIT compilation for performance optimization
+
+    # Statistical arbitrage (added for ARASA strategy)
+    "statsmodels>=0.14.0",  # VECM, Johansen, ADF cointegration tests
+    "arch>=6.0.0",          # GARCH models for volatility
+    "hmmlearn>=0.3.0",      # Hidden Markov Models for regime detection
+    "scipy>=1.11.0",        # Statistical functions and copulas
+
+    # Advanced portfolio optimization (Phase 1 & 2 strategies)
+    "pyportfolioopt>=1.5.5",     # HRP, Black-Litterman, Risk Parity
+    "cvxpy>=1.4.0",              # Convex optimization for portfolio
+    "copulas>=0.11.0",           # Copula modeling for pairs trading
+
+    # Deep reinforcement learning for portfolio optimization
+    "stable-baselines3>=2.3.0",  # PPO, A2C, SAC agents
+    "gymnasium>=0.29.0",         # RL environments
+    "torch>=2.0.0",              # PyTorch for neural networks
+    # SOTA 2025 additions
+    "pytorch-lightning>=2.0.0",  # Training framework for Transformer-GRU
+    "transformers>=4.35.0",      # FinBERT sentiment and transformer utilities
+    "xgboost>=2.0.0",            # Feature selection for DDQN strategy
+    "shap>=0.44.0",              # Explainability-driven feature ranking
+    "praw>=7.7.0",               # Reddit sentiment ingestion
+    "tweepy>=4.14.0",            # Twitter/X sentiment ingestion
+    "ccxtpro>=0.9.0",            # Websocket order book streaming
+    "psutil>=5.9.0",             # Resource monitoring for master analysis
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.4.0",
+    "pytest-asyncio>=0.21.0",
+    "pytest-cov>=4.1.0",
+    "black>=23.7.0",
+    "ruff>=0.1.0",
+    "mypy>=1.6.0",
+]
+
+[project.scripts]
+crypto-trader = "crypto_trader.cli.app:app"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.black]
+line-length = 88
+target-version = ['py311']
+
+[tool.ruff]
+line-length = 88
+target-version = "py311"
+select = ["E", "F", "I"]
+ignore = ["E501"]
+
+[tool.mypy]
+python_version = "3.11"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = false

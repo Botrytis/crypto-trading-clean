@@ -3,13 +3,24 @@
 **Original**: https://github.com/dedigadot/Crypto-Multi-Pair  
 **This Fork**: Stripped down, production-focused cryptocurrency backtesting
 
-## What We Kept
+## Current Status
+
+⚠️ **Work in Progress** - This is the initial code import from the original repo.
+
+We've copied the core functionality:
+- ✅ Source code imported (`src/crypto_trader/`)
+- ✅ All strategies preserved (will trim to top 3 in Phase 1)
+- ✅ Backtesting engine included
+- ✅ Data fetchers and core utilities
+- 🚧 Clean-up and refactoring in progress
+
+## What We Kept (For Now)
 
 - Core backtesting engine
-- Strategy registry pattern  
+- Strategy registry pattern
 - Data fetching with caching
 - Walk-forward validation
-- Parallel processing
+- All original strategies (temporarily)
 
 ## What We Removed
 
@@ -39,18 +50,22 @@
 ## Quick Start
 
 ```bash
-# Install core dependencies only
+# Clone the repo
+git clone https://github.com/Botrytis/crypto-trading-clean.git
+cd crypto-trading-clean
+
+# Install dependencies
 pip install -r requirements.txt
 
-# Run a backtest
-python -m crypto_trader backtest --symbol BTC/USDT --strategy sma_cross --days 365
+# TODO: CLI being refactored
+# For now, you can explore the source in src/crypto_trader/
 
-# Run tests
+# Run tests (when ready)
 pytest
-
-# Check data quality
-python -m crypto_trader validate-data
 ```
+
+**Note**: The original scripts (`master.py`, `run_full_pipeline.py`) are being refactored.
+Phase 1 will deliver a clean CLI interface.
 
 ## Architecture
 
