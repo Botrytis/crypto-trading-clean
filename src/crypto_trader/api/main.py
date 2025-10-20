@@ -12,7 +12,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from loguru import logger
 
-from crypto_trader.api.routes import strategies, backtest, data
+from crypto_trader.api.routes import strategies, backtest, data, benchmark
 
 # Create FastAPI app
 app = FastAPI(
@@ -36,6 +36,7 @@ app.add_middleware(
 app.include_router(strategies.router, prefix="/api/strategies", tags=["strategies"])
 app.include_router(backtest.router, prefix="/api/backtest", tags=["backtest"])
 app.include_router(data.router, prefix="/api/data", tags=["data"])
+app.include_router(benchmark.router, prefix="/api/benchmark", tags=["benchmark"])
 
 
 @app.on_event("startup")
