@@ -265,10 +265,10 @@ async def _run_backtest_task(job_id: str, request: BacktestRequest):
             ],
             equity_curve=[
                 {
-                    "timestamp": str(row["timestamp"]),
-                    "equity": row["equity"],
+                    "timestamp": str(timestamp),
+                    "equity": float(value),
                 }
-                for _, row in result.equity_curve.head(1000).iterrows()  # Limit to 1000 points
+                for timestamp, value in result.equity_curve[:1000]  # Limit to 1000 points
             ]
         )
 
