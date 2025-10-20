@@ -9,10 +9,11 @@
 
 - 📊 **25+ Trading Strategies** - From simple moving averages to advanced machine learning
 - 🧪 **Powerful Backtesting** - VectorBT-powered vectorized backtesting engine
+- 🔬 **Walk-Forward Optimization** - Scientific parameter validation with train/val/test splits
 - 🌐 **Web Interface** - Beautiful Streamlit UI for strategy exploration
 - 📈 **Interactive Charts** - Plotly visualizations for equity curves and performance
 - 🔍 **Strategy Comparison** - Side-by-side analysis with heatmaps and radar charts
-- ⚡ **Fast API** - RESTful backend with async job processing
+- ⚡ **Fast API** - RESTful backend with async job processing (340x faster benchmarks)
 - 📦 **Professional Stack** - FastAPI, Streamlit, VectorBT, CCXT
 
 ## 🚀 Quick Start
@@ -68,7 +69,10 @@ See [QUICKSTART.md](QUICKSTART.md) for detailed setup instructions.
 - **[QUICKSTART.md](QUICKSTART.md)** - 5-minute setup guide
 - **[PHASE1_COMPLETE.md](PHASE1_COMPLETE.md)** - Full feature documentation
 - **[AUDIT_REPORT.md](AUDIT_REPORT.md)** - Codebase analysis
-- **API Docs** - http://localhost:8001/api/docs (when running)
+- **[CHANGELOG.md](CHANGELOG.md)** - Recent changes and updates
+- **[docs/API.md](docs/API.md)** - Complete API reference
+- **[src/crypto_trader/optimization/README.md](src/crypto_trader/optimization/README.md)** - Walk-forward optimization guide
+- **API Docs** - http://localhost:8001/docs (when running)
 
 ## 🎯 What You Can Do
 
@@ -196,6 +200,16 @@ Side-by-side analysis with heatmaps
 - ✅ Backtest execution with progress tracking
 - ✅ Results viewer with charts
 - ✅ Strategy comparison
+- ✅ Walk-forward optimization system
+- ✅ Benchmark performance optimization (340x speedup)
+
+**Recent Updates (October 2025)**
+- ✅ Walk-forward validation with train/val/test splits
+- ✅ Parameter grid optimization
+- ✅ CLI tool for parameter optimization
+- ✅ Benchmark API optimization (~340x faster)
+- ✅ Comprehensive API documentation
+- ✅ CHANGELOG.md with migration notes
 
 **Phase 2: Planned**
 - Database integration (PostgreSQL)
