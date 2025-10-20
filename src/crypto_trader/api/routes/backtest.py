@@ -219,6 +219,9 @@ async def _run_backtest_task(job_id: str, request: BacktestRequest):
             limit=None
         )
 
+        # Reset index to ensure 'timestamp' column exists for strategy validation
+        data = data.reset_index()
+
         # Update progress
         backtest_jobs[job_id]["status"].progress = 0.5
         backtest_jobs[job_id]["status"].message = "Running backtest..."
