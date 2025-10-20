@@ -156,13 +156,20 @@ async def list_benchmark_jobs(limit: int = 50):
 
 async def _run_benchmark_task(job_id: str, config: BenchmarkConfig, strategies: List[str]):
     """Background task to run benchmark tests."""
+    from crypto_trader.data.fetchers import BinanceDataFetcher
+
     job = benchmark_jobs[job_id]
     status = job["status"]
 
     try:
         status.status = "running"
-        status.message = "Running benchmark tests..."
+        status.message = "Initializing data fetcher..."
 
+        # Create a single shared fetcher instance (reuse across all tests)
+        fetcher = BinanceDataFetcher()
+        logger.info("Initialized shared BinanceDataFetcher for benchmark")
+
+        status.message = "Running benchmark tests..."
         results = []
         completed = 0
         failed = 0
@@ -174,14 +181,15 @@ async def _run_benchmark_task(job_id: str, config: BenchmarkConfig, strategies: 
                 for timeframe in config.timeframes:
                     for period_days in config.periods:
                         try:
-                            # Run single backtest
+                            # Run single backtest with shared fetcher
                             result = await _run_single_backtest(
                                 strategy_name=strategy_name,
                                 symbol=symbol,
                                 timeframe=timeframe,
                                 period_days=period_days,
                                 initial_capital=config.initial_capital,
-                                commission=config.commission
+                                commission=config.commission,
+                                fetcher=fetcher  # Pass shared fetcher
                             )
 
                             results.append(result)
@@ -219,11 +227,11 @@ async def _run_single_backtest(
     timeframe: str,
     period_days: int,
     initial_capital: float,
-    commission: float
+    commission: float,
+    fetcher: Any  # Shared BinanceDataFetcher instance
 ) -> Dict[str, Any]:
     """Run a single backtest and return results."""
     from crypto_trader.strategies import get_registry
-    from crypto_trader.data.fetchers import BinanceDataFetcher
     from crypto_trader.backtesting.engine import BacktestEngine
     from crypto_trader.core.config import BacktestConfig
     from datetime import timedelta
@@ -239,8 +247,7 @@ async def _run_single_backtest(
         strategy_class = strategies[strategy_name]["class"]
         strategy = strategy_class()
 
-        # Fetch data
-        fetcher = BinanceDataFetcher()
+        # Fetch data using shared fetcher
         end_date = datetime.now()
         start_date = end_date - timedelta(days=period_days)
 
