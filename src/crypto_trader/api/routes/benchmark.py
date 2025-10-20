@@ -231,10 +231,12 @@ async def _run_single_backtest(
     try:
         # Get strategy from registry
         registry = get_registry()
-        if strategy_name not in registry:
+        strategies = registry.list_strategies()
+
+        if strategy_name not in strategies:
             raise ValueError(f"Strategy '{strategy_name}' not found")
 
-        strategy_class = registry[strategy_name]
+        strategy_class = strategies[strategy_name]["class"]
         strategy = strategy_class()
 
         # Fetch data
@@ -242,12 +244,16 @@ async def _run_single_backtest(
         end_date = datetime.now()
         start_date = end_date - timedelta(days=period_days)
 
-        data = fetcher.fetch_ohlcv(
+        data = fetcher.get_ohlcv(
             symbol=symbol,
             timeframe=timeframe,
-            since=start_date,
+            start_date=start_date,
+            end_date=end_date,
             limit=None
         )
+
+        # Reset index to make timestamp a column (required by strategy validation)
+        data = data.reset_index()
 
         # Create backtest config
         config = BacktestConfig(
