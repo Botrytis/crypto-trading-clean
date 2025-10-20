@@ -308,6 +308,14 @@ class StrategyRegistry:
         """Check if a strategy is registered."""
         return name in self._strategies
 
+    def __getitem__(self, name: str) -> Type[BaseStrategy]:
+        """
+        Get strategy by name using subscript notation.
+
+        Allows registry[name] syntax for convenience.
+        """
+        return self.get_strategy(name)
+
     def __repr__(self) -> str:
         """String representation of the registry."""
         return f"StrategyRegistry(strategies={len(self._strategies)})"
