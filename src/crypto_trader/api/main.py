@@ -43,6 +43,14 @@ async def startup_event():
     """Initialize resources on startup."""
     logger.info("🚀 Crypto Trading API starting up...")
     logger.info("📊 Loading strategies...")
+
+    # Import strategy library to trigger registration
+    import crypto_trader.strategies.library  # noqa: F401
+    from crypto_trader.strategies import get_registry
+
+    registry = get_registry()
+    strategy_count = len(registry.list_strategies())
+    logger.info(f"✅ Loaded {strategy_count} strategies")
     logger.info("✅ API ready!")
 
 
