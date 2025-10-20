@@ -1,5 +1,4 @@
 """
-from crypto_trader.web.config import API_URL
 Strategy Browser Page
 
 Browse, search, and filter all available trading strategies.
@@ -9,6 +8,7 @@ import streamlit as st
 import requests
 import pandas as pd
 from typing import List, Dict, Any
+from crypto_trader.web.config import API_URL
 
 st.set_page_config(page_title="Strategies", page_icon="📚", layout="wide")
 

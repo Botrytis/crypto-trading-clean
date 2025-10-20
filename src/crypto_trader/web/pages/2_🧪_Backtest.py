@@ -1,5 +1,4 @@
 """
-from crypto_trader.web.config import API_URL
 Backtest Runner Page
 
 Configure and execute strategy backtests with real-time progress tracking.
@@ -10,6 +9,7 @@ import requests
 import time
 from datetime import datetime, timedelta
 from typing import Dict, Any
+from crypto_trader.web.config import API_URL
 
 st.set_page_config(page_title="Backtest", page_icon="🧪", layout="wide")
 

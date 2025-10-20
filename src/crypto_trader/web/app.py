@@ -1,5 +1,4 @@
 """
-from crypto_trader.web.config import API_URL
 Crypto Trading Platform - Streamlit Web UI
 
 Main application entry point for the multi-page Streamlit dashboard.
@@ -10,6 +9,7 @@ Run with:
 
 import streamlit as st
 from pathlib import Path
+from crypto_trader.web.config import API_URL
 
 # Page config
 st.set_page_config(

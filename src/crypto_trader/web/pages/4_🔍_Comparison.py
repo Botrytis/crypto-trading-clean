@@ -1,5 +1,4 @@
 """
-from crypto_trader.web.config import API_URL
 Strategy Comparison Page
 
 Compare multiple strategies side-by-side with performance heatmaps.

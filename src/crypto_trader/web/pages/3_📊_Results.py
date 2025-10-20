@@ -1,5 +1,4 @@
 """
-from crypto_trader.web.config import API_URL
 Results Viewer Page
 
 Display detailed backtest results with charts, metrics, and trade analysis.
