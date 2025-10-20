@@ -265,8 +265,8 @@ async def _run_backtest_task(job_id: str, request: BacktestRequest):
             ],
             equity_curve=[
                 {
-                    "timestamp": str(timestamp),
-                    "equity": float(value),
+                    "timestamp": str(timestamp) if timestamp is not None else "",
+                    "equity": float(value) if value is not None else 0.0,
                 }
                 for timestamp, value in result.equity_curve[:1000]  # Limit to 1000 points
             ]
