@@ -73,7 +73,7 @@ with st.sidebar:
     # Check API connectivity
     import requests
     try:
-        response = requests.get("http://localhost:8000/health", timeout=2)
+        response = requests.get("http://localhost:8001/health", timeout=2)
         if response.status_code == 200:
             st.success("✅ API Connected")
         else:
@@ -215,7 +215,7 @@ st.markdown("---")
 # Footer
 st.markdown("### 📖 Documentation")
 st.markdown("""
-- **API Docs**: [http://localhost:8000/api/docs](http://localhost:8000/api/docs)
+- **API Docs**: [http://localhost:8001/api/docs](http://localhost:8001/api/docs)
 - **GitHub**: [crypto-trading-clean](https://github.com/Botrytis/crypto-trading-clean)
 - **Phase 1 Plan**: See `PHASE1_REVISED.md` in repo
 """)

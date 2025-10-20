@@ -2,8 +2,8 @@
 # Start FastAPI Backend Server
 
 echo "🚀 Starting Crypto Trading API..."
-echo "📍 API will be available at: http://localhost:8000"
-echo "📚 API Documentation: http://localhost:8000/api/docs"
+echo "📍 API will be available at: http://localhost:8001"
+echo "📚 API Documentation: http://localhost:8001/api/docs"
 echo ""
 
 cd "$(dirname "$0")/.." || exit 1
@@ -14,4 +14,4 @@ if [ -d "venv" ]; then
 fi
 
 # Start API server
-uvicorn crypto_trader.api.main:app --reload --port 8000 --host 0.0.0.0
+uvicorn crypto_trader.api.main:app --reload --port 8001 --host 0.0.0.0

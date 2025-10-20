@@ -13,7 +13,7 @@ import plotly.express as px
 st.set_page_config(page_title="Comparison", page_icon="🔍", layout="wide")
 
 # API URL
-API_URL = "http://localhost:8000"
+API_URL = "http://localhost:8001"
 
 # Page header
 st.title("🔍 Strategy Comparison")

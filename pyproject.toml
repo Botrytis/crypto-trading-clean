@@ -93,6 +93,9 @@ dev = [
 [project.scripts]
 crypto-trader = "crypto_trader.cli.app:app"
 
+[tool.hatchling.build.targets.wheel]
+packages = ["src/crypto_trader"]
+
 [build-system]
 requires = ["hatchling"]
 build-backend = "hatchling.build"

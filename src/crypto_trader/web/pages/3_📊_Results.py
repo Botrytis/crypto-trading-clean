@@ -14,7 +14,7 @@ from datetime import datetime
 st.set_page_config(page_title="Results", page_icon="📊", layout="wide")
 
 # API URL
-API_URL = "http://localhost:8000"
+API_URL = "http://localhost:8001"
 
 # Page header
 st.title("📊 Backtest Results")
