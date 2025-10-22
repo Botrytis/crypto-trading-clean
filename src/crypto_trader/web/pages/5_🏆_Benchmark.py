@@ -29,8 +29,11 @@ def run_benchmark(config):
         response = requests.post(f"{API_URL}/api/benchmark/run", json=config, timeout=10)
         if response.status_code == 200:
             return response.json()
-        return None
-    except:
+        else:
+            st.error(f"API returned status {response.status_code}: {response.text}")
+            return None
+    except Exception as e:
+        st.error(f"Error starting benchmark: {str(e)}")
         return None
 
 def get_benchmark_status(job_id):
