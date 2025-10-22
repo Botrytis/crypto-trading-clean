@@ -263,15 +263,19 @@ if hasattr(st.session_state, 'current_job_id'):
                     cols = st.columns(5)
 
                     with cols[0]:
-                        st.metric("Total Return", f"{metrics.get('total_return', 0):.2%}")
+                        total_return = metrics.get('total_return') or 0
+                        st.metric("Total Return", f"{total_return:.2%}")
                     with cols[1]:
-                        st.metric("Sharpe Ratio", f"{metrics.get('sharpe_ratio', 0):.2f}")
+                        sharpe = metrics.get('sharpe_ratio') or 0
+                        st.metric("Sharpe Ratio", f"{sharpe:.2f}")
                     with cols[2]:
-                        st.metric("Max Drawdown", f"{metrics.get('max_drawdown', 0):.2%}")
+                        drawdown = metrics.get('max_drawdown') or 0
+                        st.metric("Max Drawdown", f"{drawdown:.2%}")
                     with cols[3]:
-                        st.metric("Win Rate", f"{metrics.get('win_rate', 0):.2%}")
+                        win_rate = metrics.get('win_rate') or 0
+                        st.metric("Win Rate", f"{win_rate:.2%}")
                     with cols[4]:
-                        st.metric("Total Trades", metrics.get('total_trades', 0))
+                        st.metric("Total Trades", metrics.get('total_trades') or 0)
 
                     st.markdown("---")
 

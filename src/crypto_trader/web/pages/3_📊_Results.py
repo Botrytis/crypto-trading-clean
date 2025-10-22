@@ -162,7 +162,7 @@ metrics = results.get("metrics", {})
 col1, col2, col3, col4, col5 = st.columns(5)
 
 with col1:
-    total_return = metrics.get('total_return', 0)
+    total_return = metrics.get('total_return') or 0
     delta_color = "normal" if total_return >= 0 else "inverse"
     st.metric(
         "Total Return",
@@ -172,7 +172,7 @@ with col1:
     )
 
 with col2:
-    sharpe = metrics.get('sharpe_ratio', 0)
+    sharpe = metrics.get('sharpe_ratio') or 0
     sharpe_grade = "🟢" if sharpe > 1.5 else "🟡" if sharpe > 1.0 else "🔴"
     st.metric(
         "Sharpe Ratio",
@@ -181,7 +181,7 @@ with col2:
     )
 
 with col3:
-    drawdown = metrics.get('max_drawdown', 0)
+    drawdown = metrics.get('max_drawdown') or 0
     dd_grade = "🟢" if abs(drawdown) < 0.2 else "🟡" if abs(drawdown) < 0.3 else "🔴"
     st.metric(
         "Max Drawdown",
@@ -192,7 +192,7 @@ with col3:
     )
 
 with col4:
-    win_rate = metrics.get('win_rate', 0)
+    win_rate = metrics.get('win_rate') or 0
     wr_grade = "🟢" if win_rate > 0.55 else "🟡" if win_rate > 0.45 else "🔴"
     st.metric(
         "Win Rate",
@@ -201,7 +201,7 @@ with col4:
     )
 
 with col5:
-    total_trades = metrics.get('total_trades', 0)
+    total_trades = metrics.get('total_trades') or 0
     st.metric(
         "Total Trades",
         f"{total_trades}",
