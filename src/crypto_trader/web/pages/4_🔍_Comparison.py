@@ -9,11 +9,9 @@ import requests
 import pandas as pd
 import plotly.graph_objects as go
 import plotly.express as px
+from crypto_trader.web.config import API_URL
 
 st.set_page_config(page_title="Comparison", page_icon="🔍", layout="wide")
-
-# API URL
-# API_URL now imported from config
 
 # Page header
 st.title("🔍 Strategy Comparison")

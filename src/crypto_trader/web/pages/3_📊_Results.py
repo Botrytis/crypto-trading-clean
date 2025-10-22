@@ -10,11 +10,9 @@ import pandas as pd
 import plotly.graph_objects as go
 from plotly.subplots import make_subplots
 from datetime import datetime
+from crypto_trader.web.config import API_URL
 
 st.set_page_config(page_title="Results", page_icon="📊", layout="wide")
-
-# API URL
-# API_URL now imported from config
 
 # Page header
 st.title("📊 Backtest Results")
